@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+<mapper namespace="com.kingfar.rbac_backend.mapper.LoginMapper">
+
+    <select id="queryUserBasicInfoByUid" resultType="com.kingfar.rbac_backend.pojo.UserBasicInfo">
+        SELECT
+            uid,
+            username,
+            pwd AS password,
+            realname,
+            gender,
+            telenum,
+            email
+        FROM
+            user
+        WHERE
+            uid=#{uid}
+    </select>
+
+    <select id="queryUserBasicInfoByUsername" resultType="com.kingfar.rbac_backend.pojo.UserBasicInfo">
+        SELECT
+            uid,
+            username,
+            pwd AS password,
+            realname,
+            gender,
+            telenum,
+            email
+        FROM
+            user
+        WHERE
+            username=#{username}
+    </select>
+
+    <select id="queryUserBasicInfoByTelenum" resultType="com.kingfar.rbac_backend.pojo.UserBasicInfo">
+        SELECT
+            uid,
+            username,
+            pwd AS password,
+            realname,
+            gender,
+            telenum,
+            email
+        FROM
+            user
+        WHERE
+            telenum=#{telenum}
+    </select>
+
+    <select id="queryUserBasicInfoByEmail" resultType="com.kingfar.rbac_backend.pojo.UserBasicInfo">
+        SELECT
+            uid,
+            username,
+            pwd AS password,
+            realname,
+            gender,
+            telenum,
+            email
+        FROM
+            user
+        WHERE
+            email=#{email}
+    </select>
+
+    <select id="queryDepartInfoByUid" resultType="com.kingfar.rbac_backend.pojo.DepartInfo">
+        SELECT
+            department.did AS did,
+            department.dname AS dname,
+            department.dcode AS dcode
+        FROM
+            user,
+            userDepartment,
+            department
+        WHERE
+            user.uid=#{uid}
+            AND user.uid=userDepartment.uid
+            AND userDepartment.did=department.did
+    </select>
+
+    <select id="queryGroupInfoByUid" resultType="com.kingfar.rbac_backend.pojo.GroupInfo">
+        SELECT
+            groupp.gid AS gid,
+            groupp.gname AS gname,
+            groupp.gcode AS gcode
+        FROM
+            user,
+            userGroup,
+            groupp
+        WHERE
+            user.uid=#{uid}
+            AND user.uid=userGroup.uid
+            AND userGroup.gid=groupp.gid
+    </select>
+
+    <select id="queryPermInfoByUid" resultType="com.kingfar.rbac_backend.pojo.PermInfo">
+        SELECT
+            permission.pid AS pid,
+            permission.pname AS pname,
+            permission.pcode AS pcode
+        FROM
+            user,
+            userRole,
+            role,
+            rolePermission,
+            permission
+        WHERE
+            user.uid=#{uid}
+            AND userRole.uid=user.uid
+            AND userRole.rid=role.rid
+            AND role.rid=rolePermission.rid
+            AND rolePermission.pid=permission.pid
+    </select>
+
+    <select id="queryRoleInfoByUid" resultType="com.kingfar.rbac_backend.pojo.RoleInfo">
+        SELECT
+            role.rid AS rid,
+            role.rname AS rname,
+            role.rcode AS rcode
+        FROM
+            user,
+            userRole,
+            role
+        WHERE
+            user.uid=#{uid}
+            AND userRole.uid=user.uid
+            AND userRole.rid=role.rid
+    </select>
+
+</mapper>

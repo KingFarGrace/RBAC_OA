@@ -1,7 +1,8 @@
 spring:
+
   datasource:
     username: root
-    password: 123456
+    password: Zkh%132546
 
     # database config
     url: jdbc:mysql://117.78.31.150:3306/RBAC_OA?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
@@ -26,3 +27,9 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.kingfar.rbac_backend.pojo
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
