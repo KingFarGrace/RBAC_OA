@@ -29,8 +29,18 @@ public interface RegisterMapper {
                            @Param("realname") String realname,
                            @Param("ctime") Date ctime);
 
+    /**
+     * count number of user by uid
+     * @param uid
+     * @return
+     */
     int countUserByUid(@Param("uid") String uid);
 
+    /**
+     * count number of user by username
+     * @param username
+     * @return
+     */
     int countUserByUsername(@Param("username") String username);
 
 }
