@@ -1,28 +1,43 @@
 package com.kingfar.rbac_backend.dto;
 
-import lombok.AllArgsConstructor;
+import com.kingfar.rbac_backend.pojo.UserBasicInfo;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
 /**
  * @author ZKH
  */
-@Data
-@AllArgsConstructor
-public class UserInfoResp {
 
-    private String uid;
-    private String username;
-    private String realname;
-    private String gender;
-    private String telenum;
-    private String email;
+@Getter
+public class UserInfoResp extends Response {
 
-    private List<String> groups;
-    private List<String> departs;
-    private List<String> roles;
+    private final UserBasicInfo basicInfo;
 
-    private List<String> permCodes;
+    private final List<String> groups;
+    private final List<String> departs;
+    private final List<String> roles;
+
+    private final List<String> permCodes;
+
+    public UserInfoResp(int code, String msg,
+                        UserBasicInfo basicInfo,
+                        List<String> groups,
+                        List<String> departs,
+                        List<String> roles,
+                        List<String> permCodes) {
+        super(code, msg);
+        this.basicInfo = basicInfo;
+        this.groups = groups;
+        this.departs = departs;
+        this.roles = roles;
+        this.permCodes = permCodes;
+    }
+
+    @Override
+    protected int groupCode() {
+        return 1;
+    }
 
 }
