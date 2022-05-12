@@ -11,9 +11,11 @@
             username,
             pwd AS password,
             realname,
+            age,
             gender,
             telenum,
-            email
+            email,
+            ctime
         FROM
             user
         WHERE
@@ -26,9 +28,11 @@
             username,
             pwd AS password,
             realname,
+            age,
             gender,
             telenum,
-            email
+            email,
+            ctime
         FROM
             user
         WHERE
@@ -41,9 +45,11 @@
             username,
             pwd AS password,
             realname,
+            age,
             gender,
             telenum,
-            email
+            email,
+            ctime
         FROM
             user
         WHERE
@@ -56,9 +62,11 @@
             username,
             pwd AS password,
             realname,
+            age,
             gender,
             telenum,
-            email
+            email,
+            ctime
         FROM
             user
         WHERE

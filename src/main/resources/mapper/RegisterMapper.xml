@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+
+<mapper namespace="com.kingfar.rbac_backend.mapper.RegisterMapper">
+
+    <insert id="setNewUserInfo">
+        INSERT INTO
+            user(
+                uid,
+                username,
+                pwd,
+                realname,
+                ctime)
+            VALUE(
+                #{uid},
+                #{username},
+                #{pwd},
+                #{realname},
+                #{ctime})
+    </insert>
+
+    <select id="countUserByUid" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            user
+        WHERE
+            user.uid=#{uid};
+    </select>
+
+    <select id="countUserByUsername" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            user
+        WHERE
+            user.username=#{username};
+    </select>
+
+</mapper>

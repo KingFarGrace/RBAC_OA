@@ -1,9 +1,12 @@
 package com.kingfar.rbac_backend.controller;
 
+import com.kingfar.rbac_backend.dto.RegisterResp;
+import com.kingfar.rbac_backend.dto.Response;
 import com.kingfar.rbac_backend.dto.UserInfoResp;
 import com.kingfar.rbac_backend.pojo.UserBasicInfo;
 import com.kingfar.rbac_backend.service.AccountService;
 import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
+import com.kingfar.rbac_backend.vo.UserRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,19 +24,13 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("/login")
-    UserInfoResp login(@RequestBody UserAuthenticationForm form) {
-        UserBasicInfo basicInfo = null;
-        UserInfoResp resp = null;
-        try {
-            basicInfo = accountService.queryBasicInfo(form.getKey());
-            if (accountService.verify
-                    (form.getPassword(), basicInfo.getPassword())) {
-                resp = accountService.queryFullInfo(basicInfo);
-            }
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
-        }
-        return resp;
+    Response login(@RequestBody UserAuthenticationForm form) {
+        return accountService.login(form);
+    }
+
+    @PostMapping("/register")
+    Response register(@RequestBody UserRegisterForm form) {
+        return accountService.register(form);
     }
 
 }
