@@ -1,6 +1,5 @@
 package com.kingfar.rbac_backend.mapper;
 
-import com.kingfar.rbac_backend.dto.UserInfoResp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
