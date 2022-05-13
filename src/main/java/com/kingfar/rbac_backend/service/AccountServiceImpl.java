@@ -33,6 +33,7 @@ public class AccountServiceImpl implements AccountService {
     private static final String LOGIN_BY_EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 
     private static final String UPDATE_COLUMN_USERNAME = "username";
+    private static final String UPDATE_COLUMN_PASSWORD = "password";
     private static final String UPDATE_COLUMN_TELENUM = "telenum";
     private static final String UPDATE_COLUMN_EMAIL = "email";
 
@@ -213,6 +214,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Response updatePassword(String uid, String newPassword) {
+        // TODO decrypt and encrypt
+        if (infoOperateMapper.updatePassword(uid, newPassword)) {
+            return new InfoOptResp(0, "success to update Password");
+        } else {
+            return new InfoOptResp(1, "failed to update user info(no such user)");
+        }
+    }
+
+    @Override
     public Response updateTelenum(String uid, String newTelenum) {
         if (infoOperateMapper.countUserNumberByTelenum(newTelenum) > 0) {
             return new InfoOptResp(3, String
@@ -244,6 +255,9 @@ public class AccountServiceImpl implements AccountService {
             if (UPDATE_COLUMN_USERNAME.equals(form.getWhichToUpdate())) {
                 System.out.println("update:" + UPDATE_COLUMN_USERNAME);
                 return updateUsername(form.getUid(), form.getNewAccountInfo());
+            } else if (UPDATE_COLUMN_PASSWORD.equals(form.getWhichToUpdate())) {
+                System.out.println("update:" + UPDATE_COLUMN_PASSWORD);
+                return updatePassword(form.getUid(), form.getNewAccountInfo());
             } else if (UPDATE_COLUMN_TELENUM.equals(form.getWhichToUpdate())) {
                 System.out.println("update:" + UPDATE_COLUMN_TELENUM);
                 return updateTelenum(form.getUid(), form.getNewAccountInfo());

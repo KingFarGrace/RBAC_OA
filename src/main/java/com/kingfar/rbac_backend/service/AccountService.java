@@ -63,6 +63,8 @@ public interface AccountService {
      */
     Response updateUsername(String uid, String newUsername);
 
+    Response updatePassword(String uid, String newPassword);
+
     /**
      * update user account ID: telenum
      * @param uid
