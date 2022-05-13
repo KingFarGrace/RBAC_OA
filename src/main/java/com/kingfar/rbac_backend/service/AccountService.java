@@ -50,7 +50,7 @@ public interface AccountService {
 
     /**
      * main method which will be called by register controller
-     * @param form VO {@link com.kingfar.rbac_backend.vo.UserRegisterForm}
+     * @param form {@link com.kingfar.rbac_backend.vo.UserRegisterForm}
      * @return see details in {@link com.kingfar.rbac_backend.dto.RegisterResp}
      */
     Response register(UserRegisterForm form);
@@ -79,6 +79,11 @@ public interface AccountService {
      */
     Response updateEmail(String uid, String newEmail);
 
+    /**
+     * main method to update user account ID(include username, telephone number, email address)
+     * @param form {@link com.kingfar.rbac_backend.vo.AccountInfoOptForm}
+     * @return {@link com.kingfar.rbac_backend.dto.UserInfoResp}
+     */
     Response updateAccountInfo(AccountInfoOptForm form);
 
 }
