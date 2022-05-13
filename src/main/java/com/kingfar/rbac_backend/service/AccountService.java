@@ -1,15 +1,14 @@
 package com.kingfar.rbac_backend.service;
 
-import com.kingfar.rbac_backend.dto.RegisterResp;
 import com.kingfar.rbac_backend.dto.Response;
 import com.kingfar.rbac_backend.dto.UserInfoResp;
 import com.kingfar.rbac_backend.pojo.UserBasicInfo;
 import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
+import com.kingfar.rbac_backend.pojo.PersonalInfo;
 import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
 import com.kingfar.rbac_backend.vo.UserRegisterForm;
-import org.apache.ibatis.jdbc.SQL;
 
-import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author ZKH
@@ -63,6 +62,12 @@ public interface AccountService {
      */
     Response updateUsername(String uid, String newUsername);
 
+    /**
+     * update password
+     * @param uid
+     * @param newPassword
+     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     */
     Response updatePassword(String uid, String newPassword);
 
     /**
@@ -84,8 +89,18 @@ public interface AccountService {
     /**
      * main method to update user account ID(include username, telephone number, email address)
      * @param form {@link com.kingfar.rbac_backend.vo.AccountInfoOptForm}
-     * @return {@link com.kingfar.rbac_backend.dto.UserInfoResp}
+     * @return see details in {@link com.kingfar.rbac_backend.dto.UserInfoResp}
      */
     Response updateAccountInfo(AccountInfoOptForm form);
+
+    /**
+     * update method to batch entry user personal information (include realname, age, gender)
+     * these information can be read by everyone, but only be updated by administer
+     * @param infos {@link com.kingfar.rbac_backend.pojo.PersonalInfo}
+     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     * return success message when all queries (data in form) has been done successfully
+     * otherwise return failed message, but those queries which are successfully done will be kept
+     */
+    Response batchPersonalInfosEntry(List<PersonalInfo> infos);
 
 }
