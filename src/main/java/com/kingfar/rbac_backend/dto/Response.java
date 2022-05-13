@@ -15,6 +15,10 @@ public abstract class Response {
         this.msg = msg;
     }
 
+    /**
+     * group code to classify different types of return code
+     * @return
+     */
     protected abstract int groupCode();
 
     protected int groupCodeMultiplier() {

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+
+<mapper namespace="com.kingfar.rbac_backend.mapper.InfoOperateMapper">
+
+    <update id="updateUsername">
+        UPDATE
+            user
+        SET
+            user.username=#{username}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <update id="updateTelenum">
+        UPDATE
+            user
+        SET
+            user.telenum=#{telenum}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <update id="updateEmail">
+        UPDATE
+            user
+        SET
+            user.email=#{email}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <update id="updateRealname">
+        UPDATE
+            user
+        SET
+            user.realname=#{realname}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <update id="updateAge">
+        UPDATE
+            user
+        SET
+            user.age=#{age}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <update id="updateGender">
+        UPDATE
+            user
+        SET
+            user.gender=#{gender}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE
+            user
+        SET
+            user.pwd=#{pwd}
+        WHERE
+            user.uid=#{uid}
+    </update>
+
+    <select id="countUserNumberByTelenum" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            user
+        WHERE
+            user.telenum=#{telenum}
+    </select>
+
+    <select id="countUserNumberByEmail" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            user
+        WHERE
+            user.email=#{email}
+    </select>
+
+</mapper>
