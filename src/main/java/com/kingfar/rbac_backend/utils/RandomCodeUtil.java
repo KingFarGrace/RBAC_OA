@@ -9,13 +9,22 @@ public class RandomCodeUtil {
 
     public static String generateRandomUID(int length) {
         String str = "0123456789";
+        return getString(length, str);
+    }
+
+    private static String getString(int length, String str) {
         Random random = new Random();
-        StringBuffer sb = new StringBuffer();
-        for(int i=0; i<length; i++){
-            int number = random.nextInt(10);
-            sb.append(str.charAt(number));
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < length; i++){
+            int idx = random.nextInt(str.length());
+            builder.append(str.charAt(idx));
         }
-        return sb.toString();
+        return builder.toString();
+    }
+
+    public static String generateRandomCode(int length) {
+        String str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        return getString(length, str);
     }
 
 }

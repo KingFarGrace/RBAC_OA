@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.kingfar.rbac_backend.mapper.JobArrangementMapper">
+
+    <insert id="setNewGroup">
+        INSERT INTO
+            group(
+                gname,
+                gcode
+            )
+            VALUE(
+                #{gname},
+                #{gcode})
+    </insert>
+
+    <update id="setNewDepartment">
+        INSERT INTO
+            department(
+                dname,
+                dcode
+            )
+            VALUE(
+                #{dname},
+                #{dcode})
+    </update>
+
+    <update id="setNewRole">
+        INSERT INTO
+            role(
+                rname,
+                rcode
+            )
+            VALUE(
+                #{rname},
+                #{rcode})
+    </update>
+
+    <select id="queryGroupDetailInfo" resultType="com.kingfar.rbac_backend.pojo.GroupDetailInfo">
+
+    </select>
+
+</mapper>
