@@ -60,17 +60,25 @@ public interface InfoOperateMapper {
     boolean updateGender(@Param("uid") String uid, @Param("gender") String gender);
 
     /**
+     * update password
+     * @param uid
+     * @param password
+     * @return
+     */
+    boolean updatePassword(@Param("uid") String uid, @Param("pwd") String password);
+
+    /**
      * count number of user by telephone number
      * @param telenum
      * @return
      */
-    int countUserNumberByTelenum(String telenum);
+    int countUserNumberByTelenum(@Param("telenum") String telenum);
 
     /**
      * count number of user by email number
      * @param email
      * @return
      */
-    int countUserNumberByEmail(String email);
+    int countUserNumberByEmail(@Param("email") String email);
 
 }

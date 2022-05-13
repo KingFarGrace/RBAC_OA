@@ -55,4 +55,14 @@ class AccountServiceImplTest {
 //        System.out.println(accountService.register(new UserRegisterForm("sandwich", "132546", "张三")));
     }
 
+    @Test
+    void testUpdateAccountID() {
+//        System.out.println(accountService.updateUsername("120181080602", "KingFarGrace"));
+//        System.out.println(accountService.updateTelenum("366270788746", "13099283829"));
+//        System.out.println(accountService.updateEmail("366270788746", "ZHANGSAN@163.com"));
+//        System.out.println(accountService.updateUsername("120181080802", "kkkkinggggg"));
+//        System.out.println(accountService.updateTelenum("120181080702", "15611311841"));
+//        System.out.println(accountService.updateEmail("120181080702", "kingfargrace@163.com"));
+    }
+
 }

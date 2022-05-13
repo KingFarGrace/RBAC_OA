@@ -10,54 +10,63 @@
         UPDATE
             user
         SET
-            username=#{username}
+            user.username=#{username}
         WHERE
-            uid=#{uid}
+            user.uid=#{uid}
     </update>
 
     <update id="updateTelenum">
         UPDATE
             user
         SET
-            telenum=#{telenum}
+            user.telenum=#{telenum}
         WHERE
-            uid=#{uid}
+            user.uid=#{uid}
     </update>
 
     <update id="updateEmail">
         UPDATE
             user
         SET
-            email=#{email}
+            user.email=#{email}
         WHERE
-            uid=#{uid}
+            user.uid=#{uid}
     </update>
 
     <update id="updateRealname">
         UPDATE
             user
         SET
-            realname=#{realname}
+            user.realname=#{realname}
         WHERE
-            uid=#{uid}
+            user.uid=#{uid}
     </update>
 
     <update id="updateAge">
         UPDATE
             user
         SET
-            age=#{age}
+            user.age=#{age}
         WHERE
-            uid=#{uid}
+            user.uid=#{uid}
     </update>
 
     <update id="updateGender">
         UPDATE
             user
         SET
-            gender=#{gender}
+            user.gender=#{gender}
         WHERE
-            uid=#{uid}
+            user.uid=#{uid}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE
+            user
+        SET
+            user.pwd=#{pwd}
+        WHERE
+            user.uid=#{uid}
     </update>
 
     <select id="countUserNumberByTelenum" resultType="java.lang.Integer">

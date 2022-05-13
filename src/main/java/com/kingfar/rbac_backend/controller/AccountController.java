@@ -3,8 +3,10 @@ package com.kingfar.rbac_backend.controller;
 import com.kingfar.rbac_backend.dto.RegisterResp;
 import com.kingfar.rbac_backend.dto.Response;
 import com.kingfar.rbac_backend.dto.UserInfoResp;
+import com.kingfar.rbac_backend.mapper.InfoOperateMapper;
 import com.kingfar.rbac_backend.pojo.UserBasicInfo;
 import com.kingfar.rbac_backend.service.AccountService;
+import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
 import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
 import com.kingfar.rbac_backend.vo.UserRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,11 @@ public class AccountController {
     @PostMapping("/register")
     Response register(@RequestBody UserRegisterForm form) {
         return accountService.register(form);
+    }
+
+    @PostMapping("/update/username")
+    Response updateUsername(@RequestBody AccountInfoOptForm form) {
+        return accountService.updateAccountInfo(form);
     }
 
 }
