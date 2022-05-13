@@ -10,6 +10,7 @@ import com.kingfar.rbac_backend.mapper.RegisterMapper;
 import com.kingfar.rbac_backend.pojo.*;
 import com.kingfar.rbac_backend.utils.RandomCodeUtil;
 import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
+import com.kingfar.rbac_backend.pojo.PersonalInfo;
 import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
 import com.kingfar.rbac_backend.vo.UserRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -271,6 +272,39 @@ public class AccountServiceImpl implements AccountService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new InfoOptResp(4, "server error, please try later");
+        }
+    }
+
+    @Override
+    public Response batchPersonalInfosEntry(List<PersonalInfo> infos) {
+        boolean isAllQueryDone = true;
+        StringBuilder errorUids = new StringBuilder();
+        for (PersonalInfo info : infos) {
+            String uid = info.getUid();
+            String realname = info.getRealname();
+            int age = info.getAge();
+            String gender = info.getGender();
+            try {
+                if (
+                        !infoOperateMapper.updateRealname(uid, realname) ||
+                        !infoOperateMapper.updateAge(uid, age) ||
+                        !infoOperateMapper.updateGender(uid, gender)
+                ) {
+                    isAllQueryDone = false;
+                    errorUids.append(uid).append(", ");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                isAllQueryDone = false;
+                errorUids.append(uid).append(", ");
+            }
+        }
+        if (isAllQueryDone) {
+            return new InfoOptResp(0, "success");
+        } else {
+            return new InfoOptResp(5, String
+                    .format("batch entry process didn't finish all queries, there are several errors happened when update information of (%s), please check if these UIDs are correct."
+                            , errorUids.toString()));
         }
     }
 
