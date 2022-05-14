@@ -38,9 +38,9 @@ public interface JobArrangementMapper {
 
     /**
      * query for group detail information
-     * @param gid
+     * @param gname
      * @return gid, group name, group code, number of member in group, members' realname/username
      */
-    GroupDetailInfo queryGroupDetailInfo(@Param("gid") String gid);
+    GroupDetailInfo queryGroupDetailInfo(@Param("gname") String gname);
 
 }

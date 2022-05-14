@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
 
 <mapper namespace="com.kingfar.rbac_backend.mapper.JobArrangementMapper">
 
     <insert id="setNewGroup">
         INSERT INTO
-            group(
+            groupp(
                 gname,
-                gcode
-            )
+                gcode)
             VALUE(
                 #{gname},
                 #{gcode})
@@ -18,8 +20,7 @@
         INSERT INTO
             department(
                 dname,
-                dcode
-            )
+                dcode)
             VALUE(
                 #{dname},
                 #{dcode})
@@ -29,15 +30,39 @@
         INSERT INTO
             role(
                 rname,
-                rcode
-            )
+                rcode)
             VALUE(
                 #{rname},
                 #{rcode})
     </update>
 
-    <select id="queryGroupDetailInfo" resultType="com.kingfar.rbac_backend.pojo.GroupDetailInfo">
+    <resultMap id="groupDetailMap" type="com.kingfar.rbac_backend.pojo.GroupDetailInfo">
+        <id property="gid" column="gid"></id>
+        <result property="gname" column="gname"></result>
+        <result property="gcode" column="gcode"></result>
+        <result property="groupMemberCount" column="COUNT(*)"></result>
+        <collection property="groupMembers" ofType="String">
+            <result column="realname"></result>
+        </collection>
+    </resultMap>
 
+    <select id="queryGroupDetailInfo" resultMap="groupDetailMap">
+        SELECT
+            groupp.gid AS gid,
+            gname,
+            gcode,
+            COUNT(*),
+            user.realname AS realname
+        FROM
+            user,
+            userGroup,
+            groupp
+        WHERE
+            groupp.gname=#{gname}
+            AND groupp.gid=userGroup.gid
+            AND userGroup.uid=user.uid
+        GROUP BY
+            gid
     </select>
 
 </mapper>
