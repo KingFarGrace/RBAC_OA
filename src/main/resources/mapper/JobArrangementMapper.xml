@@ -152,4 +152,33 @@
             dname=#{dname}
     </select>
 
+    <select id="queryRoleInfoByRoleName" resultType="com.kingfar.rbac_backend.pojo.RoleInfo">
+        SELECT
+            rid,
+            rname,
+            rcode
+        FROM
+            role
+        WHERE
+            rname=#{rname}
+    </select>
+
+    <select id="countRoleNumberByName" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            role
+        WHERE
+            role.rname=#{rname}
+    </select>
+
+    <select id="countRoleNumberByCode" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            role
+        WHERE
+            role.rcode=#{rcode}
+    </select>
+
 </mapper>

@@ -3,11 +3,9 @@ package com.kingfar.rbac_backend.service;
 import com.kingfar.rbac_backend.dto.DepartOptResp;
 import com.kingfar.rbac_backend.dto.GroupOptResp;
 import com.kingfar.rbac_backend.dto.Response;
+import com.kingfar.rbac_backend.dto.RoleOptResp;
 import com.kingfar.rbac_backend.mapper.JobArrangementMapper;
-import com.kingfar.rbac_backend.pojo.DepartDetailInfo;
-import com.kingfar.rbac_backend.pojo.DepartInfo;
-import com.kingfar.rbac_backend.pojo.GroupDetailInfo;
-import com.kingfar.rbac_backend.pojo.GroupInfo;
+import com.kingfar.rbac_backend.pojo.*;
 import com.kingfar.rbac_backend.utils.RandomUtil;
 import com.kingfar.rbac_backend.vo.JobInfoOptForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,7 +142,24 @@ public class JobArrangementServiceImpl implements JobArrangementService {
 
     @Override
     public Response setNewRole(String roleName) {
-        return null;
+        try {
+            if (jobArrangementMapper.countRoleNumberByName(roleName) != 0) {
+                return new RoleOptResp(3, String.
+                        format("role name (%s) has been used, please change.", roleName));
+            }
+            String code = RandomUtil.generateRandomCode(8);
+            while (jobArrangementMapper.countRoleNumberByCode(code) != 0) {
+                code = RandomUtil.generateRandomCode(8);
+            }
+            if (jobArrangementMapper.setNewRole(roleName, code)) {
+                RoleInfo info = jobArrangementMapper.queryRoleInfoByRoleName(roleName);
+                return new RoleOptResp(0, "success");
+            } else {
+                return new RoleOptResp(6, "set new role failed by unknown reason, please try again.");
+            }
+        } catch (Exception e) {
+            return new RoleOptResp(4,"server error, please try later.");
+        }
     }
 
     @Override

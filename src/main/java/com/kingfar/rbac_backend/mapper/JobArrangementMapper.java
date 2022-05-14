@@ -1,9 +1,6 @@
 package com.kingfar.rbac_backend.mapper;
 
-import com.kingfar.rbac_backend.pojo.DepartDetailInfo;
-import com.kingfar.rbac_backend.pojo.DepartInfo;
-import com.kingfar.rbac_backend.pojo.GroupDetailInfo;
-import com.kingfar.rbac_backend.pojo.GroupInfo;
+import com.kingfar.rbac_backend.pojo.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -37,7 +34,7 @@ public interface JobArrangementMapper {
     int countGroupNumberByCode(@Param("gcode") String groupCode);
 
     /**
-     * query department basic by certain name
+     * query department basic info by certain name
      * @param departName
      * @return see details in {@link com.kingfar.rbac_backend.pojo.DepartInfo}
      */
@@ -56,6 +53,27 @@ public interface JobArrangementMapper {
      * @return
      */
     int countDepartNumberByCode(@Param("dcode") String departCode);
+
+    /**
+     * query role basic info by role name
+     * @param roleName
+     * @return see details in {@link com.kingfar.rbac_backend.pojo.RoleInfo}
+     */
+    RoleInfo queryRoleInfoByRoleName(@Param("rname") String roleName);
+
+    /**
+     * count number of role in certain name
+     * @param roleName
+     * @return
+     */
+    int countRoleNumberByName(@Param("rname") String roleName);
+
+    /**
+     * count number of role in certain code
+     * @param roleCode
+     * @return
+     */
+    int countRoleNumberByCode(@Param("rcode") String roleCode);
 
     /**
      * establish new group(need for permission)
