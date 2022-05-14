@@ -1,11 +1,9 @@
 package com.kingfar.rbac_backend.mapper;
 
-import com.kingfar.rbac_backend.utils.RandomCodeUtil;
+import com.kingfar.rbac_backend.utils.RandomUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class JobArrangementMapperTest {
@@ -15,12 +13,12 @@ class JobArrangementMapperTest {
 
     @Test
     void setNewGroup() {
-        System.out.println(jobArrangementMapper.setNewGroup("人工智能研究小组", RandomCodeUtil.generateRandomCode(8)));
+        System.out.println(jobArrangementMapper.setNewGroup("人工智能研究小组", RandomUtil.generateRandomCode(8)));
     }
 
     @Test
     void setNewDepartment() {
-        System.out.println(jobArrangementMapper.setNewDepartment("财务部", RandomCodeUtil.generateRandomCode(8)));
+        System.out.println(jobArrangementMapper.setNewDepartment("财务部", RandomUtil.generateRandomCode(8)));
     }
 
     @Test

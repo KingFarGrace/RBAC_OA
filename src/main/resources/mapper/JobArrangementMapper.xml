@@ -94,4 +94,62 @@
             did
     </select>
 
+    <select id="countGroupNumberByName" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            groupp
+        WHERE
+            groupp.gname=#{gname}
+    </select>
+
+    <select id="countGroupNumberByCode" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            groupp
+        WHERE
+            groupp.gcode=#{gcode}
+    </select>
+
+    <select id="countDepartNumberByName" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            department
+        WHERE
+            department.dname=#{dname}
+    </select>
+
+    <select id="countDepartNumberByCode" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            department
+        WHERE
+            department.dcode=#{dcode}
+    </select>
+
+    <select id="queryGroupInfoByGroupName" resultType="com.kingfar.rbac_backend.pojo.GroupInfo">
+        SELECT
+            gid,
+            gname,
+            gcode
+        FROM
+            groupp
+        WHERE
+            gname=#{gname}
+    </select>
+
+    <select id="queryDepartInfoByDepartName" resultType="com.kingfar.rbac_backend.pojo.DepartInfo">
+        SELECT
+            did,
+            dname,
+            dcode
+        FROM
+            department
+        WHERE
+            dname=#{dname}
+    </select>
+
 </mapper>

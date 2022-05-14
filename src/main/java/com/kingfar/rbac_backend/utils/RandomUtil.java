@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * @author ZKH
  */
-public class RandomCodeUtil {
+public class RandomUtil {
 
     public static String generateRandomUID(int length) {
         String str = "0123456789";

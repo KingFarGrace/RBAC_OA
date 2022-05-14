@@ -8,7 +8,7 @@ import com.kingfar.rbac_backend.mapper.InfoOperateMapper;
 import com.kingfar.rbac_backend.mapper.LoginMapper;
 import com.kingfar.rbac_backend.mapper.RegisterMapper;
 import com.kingfar.rbac_backend.pojo.*;
-import com.kingfar.rbac_backend.utils.RandomCodeUtil;
+import com.kingfar.rbac_backend.utils.RandomUtil;
 import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
 import com.kingfar.rbac_backend.pojo.PersonalInfo;
 import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
@@ -178,27 +178,29 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Response register(UserRegisterForm form) {
         try {
-            String uid = RandomCodeUtil.generateRandomUID(12);
+            String uid = RandomUtil.generateRandomUID(12);
             while (registerMapper.countUserByUid(uid) != 0) {
-                uid = RandomCodeUtil.generateRandomUID(12);
+                uid = RandomUtil.generateRandomUID(12);
             }
             if (registerMapper.countUserByUsername(form.getUsername()) != 0) {
                 return new RegisterResp(3, String
-                        .format("username has been occupied(%s), please change it.", form.getUsername()));
+                        .format("username has been occupied(%s), please change it.", form.getUsername()), "");
             }
-            registerMapper
-                    .setNewUserInfo(
-                            uid,
-                            form.getUsername(),
-                            form.getPassword(),
-                            form.getRealname(),
-                            new Date(System.currentTimeMillis())
-                    );
+            if (registerMapper.setNewUserInfo(
+                    uid,
+                    form.getUsername(),
+                    form.getPassword(),
+                    form.getRealname(),
+                    new Date(System.currentTimeMillis())
+            )){
+                return new RegisterResp(0, "success", uid);
+            } else {
+                return new RegisterResp(6, "register failed by unknown reason, please try again.", "");
+            }
         } catch (DuplicateKeyException duplicateKeyException) {
             System.out.println(duplicateKeyException.getMessage());
-            return new RegisterResp(4, "server error, please try later.");
+            return new RegisterResp(4, "server error, please try later.", "");
         }
-        return new RegisterResp(0, "success");
     }
 
     @Override

@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class DepartOptResp extends Response {
 
-    private DepartDetailInfo departDetailInfo;
+    private final DepartDetailInfo departDetailInfo;
 
     public DepartOptResp(int code, String msg, DepartDetailInfo departDetailInfo) {
         super(code, msg);
