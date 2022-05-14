@@ -15,11 +15,12 @@ class JobArrangementMapperTest {
 
     @Test
     void setNewGroup() {
-        System.out.println(jobArrangementMapper.setNewGroup("人工智能研究组", RandomCodeUtil.generateRandomCode(8)));
+        System.out.println(jobArrangementMapper.setNewGroup("人工智能研究小组", RandomCodeUtil.generateRandomCode(8)));
     }
 
     @Test
     void setNewDepartment() {
+        System.out.println(jobArrangementMapper.setNewDepartment("财务部", RandomCodeUtil.generateRandomCode(8)));
     }
 
     @Test
@@ -29,5 +30,10 @@ class JobArrangementMapperTest {
     @Test
     void queryGroupDetailInfo() {
         System.out.println(jobArrangementMapper.queryGroupDetailInfo("后台管理系统研究小组"));
+    }
+
+    @Test
+    void queryDepartDetailInfo() {
+        System.out.println(jobArrangementMapper.queryDepartDetailInfo("财务部"));
     }
 }

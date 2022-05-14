@@ -65,4 +65,33 @@
             gid
     </select>
 
+    <resultMap id="departDetailMap" type="com.kingfar.rbac_backend.pojo.DepartDetailInfo">
+        <id property="did" column="did"></id>
+        <result property="dname" column="dname"></result>
+        <result property="dcode" column="dcode"></result>
+        <result property="departMemberCount" column="COUNT(*)"></result>
+        <collection property="departMembers" ofType="String">
+            <result column="realname"></result>
+        </collection>
+    </resultMap>
+
+    <select id="queryDepartDetailInfo" resultMap="departDetailMap">
+        SELECT
+            department.did AS did,
+            dname,
+            dcode,
+            COUNT(*),
+            user.realname AS realname
+        FROM
+            user,
+            userDepartment,
+            department
+        WHERE
+            department.dname=#{dname}
+            AND department.did=userDepartment.did
+            AND userDepartment.uid=user.uid
+        GROUP BY
+            did
+    </select>
+
 </mapper>

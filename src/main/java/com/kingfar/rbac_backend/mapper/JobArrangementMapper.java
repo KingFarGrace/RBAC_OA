@@ -1,5 +1,6 @@
 package com.kingfar.rbac_backend.mapper;
 
+import com.kingfar.rbac_backend.pojo.DepartDetailInfo;
 import com.kingfar.rbac_backend.pojo.GroupDetailInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -38,9 +39,16 @@ public interface JobArrangementMapper {
 
     /**
      * query for group detail information
-     * @param gname
+     * @param groupName
      * @return gid, group name, group code, number of member in group, members' realname/username
      */
-    GroupDetailInfo queryGroupDetailInfo(@Param("gname") String gname);
+    GroupDetailInfo queryGroupDetailInfo(@Param("gname") String groupName);
+
+    /**
+     * query for department detail information
+     * @param departName
+     * @return did, department name, department code, number of member in group, members' realname
+     */
+    DepartDetailInfo queryDepartDetailInfo(@Param("dname") String departName);
 
 }

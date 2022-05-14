@@ -21,4 +21,9 @@ public class JobController {
         return jobArrangementService.queryGroupInfo(groupName);
     }
 
+    @PostMapping("/queryDepartInfo")
+    Response getDepartInfo(String departName) {
+        return jobArrangementService.queryDepartInfo(departName);
+    }
+
 }
