@@ -15,16 +15,46 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface JobArrangementMapper {
 
+    /**
+     * query group basic info by group name
+     * @param groupName
+     * @return see details in {@link com.kingfar.rbac_backend.pojo.GroupInfo}
+     */
     GroupInfo queryGroupInfoByGroupName(@Param("gname") String groupName);
 
+    /**
+     * count number of group in certain name
+     * @param groupName
+     * @return
+     */
     int countGroupNumberByName(@Param("gname") String groupName);
 
+    /**
+     * count number of group in certain code
+     * @param groupCode
+     * @return
+     */
     int countGroupNumberByCode(@Param("gcode") String groupCode);
 
+    /**
+     * query department basic by certain name
+     * @param departName
+     * @return see details in {@link com.kingfar.rbac_backend.pojo.DepartInfo}
+     */
     DepartInfo queryDepartInfoByDepartName(@Param("dname") String departName);
 
+    /**
+     * count number of department in certain name
+     * @param departName
+     * @return
+     */
     int countDepartNumberByName(@Param("dname") String departName);
 
+    /**
+     * count number of department in certain code
+     * @param departCode
+     * @return
+     */
     int countDepartNumberByCode(@Param("dcode") String departCode);
 
     /**

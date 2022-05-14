@@ -255,21 +255,22 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Response updateAccountInfo(AccountInfoOptForm form) {
         try {
-            if (UPDATE_COLUMN_USERNAME.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_USERNAME);
-                return updateUsername(form.getUid(), form.getNewAccountInfo());
-            } else if (UPDATE_COLUMN_PASSWORD.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_PASSWORD);
-                return updatePassword(form.getUid(), form.getNewAccountInfo());
-            } else if (UPDATE_COLUMN_TELENUM.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_TELENUM);
-                return updateTelenum(form.getUid(), form.getNewAccountInfo());
-            } else if (UPDATE_COLUMN_EMAIL.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_EMAIL);
-                return updateEmail(form.getUid(), form.getNewAccountInfo());
-            } else {
-                return new InfoOptResp(2, String
-                        .format("reject by server:　unauthorized update request(%s)", form.getWhichToUpdate()));
+            switch (form.getWhichToUpdate()) {
+                case UPDATE_COLUMN_USERNAME:
+                    System.out.println("update:" + UPDATE_COLUMN_USERNAME);
+                    return updateUsername(form.getUid(), form.getNewAccountInfo());
+                case UPDATE_COLUMN_PASSWORD:
+                    System.out.println("update:" + UPDATE_COLUMN_PASSWORD);
+                    return updatePassword(form.getUid(), form.getNewAccountInfo());
+                case UPDATE_COLUMN_TELENUM:
+                    System.out.println("update:" + UPDATE_COLUMN_TELENUM);
+                    return updateTelenum(form.getUid(), form.getNewAccountInfo());
+                case UPDATE_COLUMN_EMAIL:
+                    System.out.println("update:" + UPDATE_COLUMN_EMAIL);
+                    return updateEmail(form.getUid(), form.getNewAccountInfo());
+                default:
+                    return new InfoOptResp(2, String
+                            .format("reject by server:　unauthorized update request(%s)", form.getWhichToUpdate()));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

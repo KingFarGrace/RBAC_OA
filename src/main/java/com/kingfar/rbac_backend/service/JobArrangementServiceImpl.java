@@ -149,14 +149,15 @@ public class JobArrangementServiceImpl implements JobArrangementService {
 
     @Override
     public Response setNewJobInfo(JobInfoOptForm form) {
-        if (form.getWhichAttrToOpt().equals(ATTR_GROUP)) {
-            return setNewGroup(form.getNewAttrName());
-        } else if (form.getWhichAttrToOpt().equals(ATTR_DEPART)) {
-            return setNewDepart(form.getNewAttrName());
-        } else if (form.getWhichAttrToOpt().equals(ATTR_ROLE)) {
-            return setNewRole(form.getNewAttrName());
-        } else {
-            return new GroupOptResp(2, String.format("reject by server:　unauthorized update request(%s)", form.getWhichAttrToOpt()), null);
+        switch (form.getWhichAttrToOpt()) {
+            case ATTR_GROUP:
+                return setNewGroup(form.getNewAttrName());
+            case ATTR_DEPART:
+                return setNewDepart(form.getNewAttrName());
+            case ATTR_ROLE:
+                return setNewRole(form.getNewAttrName());
+            default:
+                return new GroupOptResp(2, String.format("reject by server:　unauthorized update request(%s)", form.getWhichAttrToOpt()), null);
         }
     }
 
