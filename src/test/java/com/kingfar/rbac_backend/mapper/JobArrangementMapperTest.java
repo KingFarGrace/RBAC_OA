@@ -27,11 +27,27 @@ class JobArrangementMapperTest {
 
     @Test
     void queryGroupDetailInfo() {
-        System.out.println(jobArrangementMapper.queryGroupDetailInfo("后台管理系统研究小组"));
+        System.out.println(jobArrangementMapper.queryGroupDetailInfo("前端技术研究小组"));
     }
 
     @Test
     void queryDepartDetailInfo() {
         System.out.println(jobArrangementMapper.queryDepartDetailInfo("财务部"));
     }
+
+    @Test
+    void setUserInGroup() {
+        System.out.println(jobArrangementMapper.setUserInGroup("120181080702", "前端技术研究小组", false));
+    }
+
+    @Test
+    void setUserInDepartment() {
+        System.out.println(jobArrangementMapper.setUserInDepartment("120181080702", "网络部", false));
+    }
+
+    @Test
+    void setUserInRole() {
+        System.out.println(jobArrangementMapper.setUserInRole("120181080702", "普通员工"));
+    }
+
 }

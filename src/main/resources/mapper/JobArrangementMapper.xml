@@ -16,7 +16,7 @@
                 #{gcode})
     </insert>
 
-    <update id="setNewDepartment">
+    <insert id="setNewDepartment">
         INSERT INTO
             department(
                 dname,
@@ -24,9 +24,9 @@
             VALUE(
                 #{dname},
                 #{dcode})
-    </update>
+    </insert>
 
-    <update id="setNewRole">
+    <insert id="setNewRole">
         INSERT INTO
             role(
                 rname,
@@ -34,13 +34,67 @@
             VALUE(
                 #{rname},
                 #{rcode})
-    </update>
+    </insert>
+
+    <insert id="setUserInGroup">
+        INSERT INTO
+            userGroup(
+                userGroup.uid,
+                userGroup.gid,
+                userGroup.is_leader
+            )
+            VALUE(
+                #{uid},
+                (SELECT
+                    groupp.gid
+                FROM
+                    groupp
+                WHERE
+                    groupp.gname=#{gname}),
+                #{is_leader}
+            )
+    </insert>
+
+    <insert id="setUserInDepartment">
+        INSERT INTO
+            userDepartment(
+                userDepartment.uid,
+                userDepartment.did,
+                userDepartment.is_leader
+            )
+            VALUE(
+                #{uid},
+                (SELECT
+                    department.did
+                FROM
+                    department
+                WHERE
+                    department.dname=#{dname}),
+                #{is_leader}
+            )
+    </insert>
+
+    <insert id="setUserInRole">
+        INSERT INTO
+            userRole(
+                userRole.uid,
+                userRole.rid
+            )
+            VALUE(
+                #{uid},
+                (SELECT
+                    role.rid
+                FROM
+                    role
+                WHERE
+                    role.rname=#{rname})
+            )
+    </insert>
 
     <resultMap id="groupDetailMap" type="com.kingfar.rbac_backend.pojo.GroupDetailInfo">
         <id property="gid" column="gid"></id>
         <result property="gname" column="gname"></result>
         <result property="gcode" column="gcode"></result>
-        <result property="groupMemberCount" column="COUNT(*)"></result>
         <collection property="groupMembers" ofType="String">
             <result column="realname"></result>
         </collection>
@@ -51,7 +105,6 @@
             groupp.gid AS gid,
             gname,
             gcode,
-            COUNT(*),
             user.realname AS realname
         FROM
             user,
@@ -62,14 +115,13 @@
             AND groupp.gid=userGroup.gid
             AND userGroup.uid=user.uid
         GROUP BY
-            gid
+            realname
     </select>
 
     <resultMap id="departDetailMap" type="com.kingfar.rbac_backend.pojo.DepartDetailInfo">
         <id property="did" column="did"></id>
         <result property="dname" column="dname"></result>
         <result property="dcode" column="dcode"></result>
-        <result property="departMemberCount" column="COUNT(*)"></result>
         <collection property="departMembers" ofType="String">
             <result column="realname"></result>
         </collection>
@@ -80,7 +132,6 @@
             department.did AS did,
             dname,
             dcode,
-            COUNT(*),
             user.realname AS realname
         FROM
             user,
@@ -91,7 +142,7 @@
             AND department.did=userDepartment.did
             AND userDepartment.uid=user.uid
         GROUP BY
-            did
+            realname
     </select>
 
     <select id="countGroupNumberByName" resultType="java.lang.Integer">

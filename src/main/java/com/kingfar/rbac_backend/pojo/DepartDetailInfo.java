@@ -2,6 +2,7 @@ package com.kingfar.rbac_backend.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author ZKH
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class DepartDetailInfo {
 

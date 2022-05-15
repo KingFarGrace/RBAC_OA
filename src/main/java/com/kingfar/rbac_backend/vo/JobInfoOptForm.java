@@ -9,6 +9,6 @@ import lombok.Data;
 public class JobInfoOptForm {
 
     private String whichAttrToOpt;
-    private String newAttrName;
+    private String attrName;
 
 }
