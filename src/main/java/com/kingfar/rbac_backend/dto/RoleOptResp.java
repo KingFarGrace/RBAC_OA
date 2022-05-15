@@ -6,18 +6,15 @@ import lombok.Getter;
  * @author ZKH
  */
 @Getter
-public class RegisterResp extends Response {
+public class RoleOptResp extends Response {
 
-    private final String uid;
-
-    public RegisterResp(int code, String msg, String uid) {
+    public RoleOptResp(int code, String msg) {
         super(code, msg);
-        this.uid = uid;
     }
 
     @Override
     protected int groupCode() {
-        return 1;
+        return 3;
     }
 
 }

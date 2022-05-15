@@ -1,7 +1,6 @@
 package com.kingfar.rbac_backend.dto;
 
 import com.kingfar.rbac_backend.pojo.UserBasicInfo;
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;

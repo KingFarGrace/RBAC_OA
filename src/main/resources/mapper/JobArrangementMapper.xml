@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+
+<mapper namespace="com.kingfar.rbac_backend.mapper.JobArrangementMapper">
+
+    <insert id="setNewGroup">
+        INSERT INTO
+            groupp(
+                gname,
+                gcode)
+            VALUE(
+                #{gname},
+                #{gcode})
+    </insert>
+
+    <insert id="setNewDepartment">
+        INSERT INTO
+            department(
+                dname,
+                dcode)
+            VALUE(
+                #{dname},
+                #{dcode})
+    </insert>
+
+    <insert id="setNewRole">
+        INSERT INTO
+            role(
+                rname,
+                rcode)
+            VALUE(
+                #{rname},
+                #{rcode})
+    </insert>
+
+    <insert id="setUserInGroup">
+        INSERT INTO
+            userGroup(
+                userGroup.uid,
+                userGroup.gid,
+                userGroup.is_leader
+            )
+            VALUE(
+                #{uid},
+                (SELECT
+                    groupp.gid
+                FROM
+                    groupp
+                WHERE
+                    groupp.gname=#{gname}),
+                #{is_leader}
+            )
+    </insert>
+
+    <insert id="setUserInDepartment">
+        INSERT INTO
+            userDepartment(
+                userDepartment.uid,
+                userDepartment.did,
+                userDepartment.is_leader
+            )
+            VALUE(
+                #{uid},
+                (SELECT
+                    department.did
+                FROM
+                    department
+                WHERE
+                    department.dname=#{dname}),
+                #{is_leader}
+            )
+    </insert>
+
+    <insert id="setUserInRole">
+        INSERT INTO
+            userRole(
+                userRole.uid,
+                userRole.rid
+            )
+            VALUE(
+                #{uid},
+                (SELECT
+                    role.rid
+                FROM
+                    role
+                WHERE
+                    role.rname=#{rname})
+            )
+    </insert>
+
+    <resultMap id="groupDetailMap" type="com.kingfar.rbac_backend.pojo.GroupDetailInfo">
+        <id property="gid" column="gid"></id>
+        <result property="gname" column="gname"></result>
+        <result property="gcode" column="gcode"></result>
+        <collection property="groupMembers" ofType="String">
+            <result column="realname"></result>
+        </collection>
+    </resultMap>
+
+    <select id="queryGroupDetailInfo" resultMap="groupDetailMap">
+        SELECT
+            groupp.gid AS gid,
+            gname,
+            gcode,
+            user.realname AS realname
+        FROM
+            user,
+            userGroup,
+            groupp
+        WHERE
+            groupp.gname=#{gname}
+            AND groupp.gid=userGroup.gid
+            AND userGroup.uid=user.uid
+        GROUP BY
+            realname
+    </select>
+
+    <resultMap id="departDetailMap" type="com.kingfar.rbac_backend.pojo.DepartDetailInfo">
+        <id property="did" column="did"></id>
+        <result property="dname" column="dname"></result>
+        <result property="dcode" column="dcode"></result>
+        <collection property="departMembers" ofType="String">
+            <result column="realname"></result>
+        </collection>
+    </resultMap>
+
+    <select id="queryDepartDetailInfo" resultMap="departDetailMap">
+        SELECT
+            department.did AS did,
+            dname,
+            dcode,
+            user.realname AS realname
+        FROM
+            user,
+            userDepartment,
+            department
+        WHERE
+            department.dname=#{dname}
+            AND department.did=userDepartment.did
+            AND userDepartment.uid=user.uid
+        GROUP BY
+            realname
+    </select>
+
+    <select id="countGroupNumberByName" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            groupp
+        WHERE
+            groupp.gname=#{gname}
+    </select>
+
+    <select id="countGroupNumberByCode" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            groupp
+        WHERE
+            groupp.gcode=#{gcode}
+    </select>
+
+    <select id="countDepartNumberByName" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            department
+        WHERE
+            department.dname=#{dname}
+    </select>
+
+    <select id="countDepartNumberByCode" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            department
+        WHERE
+            department.dcode=#{dcode}
+    </select>
+
+    <select id="queryGroupInfoByGroupName" resultType="com.kingfar.rbac_backend.pojo.GroupInfo">
+        SELECT
+            gid,
+            gname,
+            gcode
+        FROM
+            groupp
+        WHERE
+            gname=#{gname}
+    </select>
+
+    <select id="queryDepartInfoByDepartName" resultType="com.kingfar.rbac_backend.pojo.DepartInfo">
+        SELECT
+            did,
+            dname,
+            dcode
+        FROM
+            department
+        WHERE
+            dname=#{dname}
+    </select>
+
+    <select id="queryRoleInfoByRoleName" resultType="com.kingfar.rbac_backend.pojo.RoleInfo">
+        SELECT
+            rid,
+            rname,
+            rcode
+        FROM
+            role
+        WHERE
+            rname=#{rname}
+    </select>
+
+    <select id="countRoleNumberByName" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            role
+        WHERE
+            role.rname=#{rname}
+    </select>
+
+    <select id="countRoleNumberByCode" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            role
+        WHERE
+            role.rcode=#{rcode}
+    </select>
+
+</mapper>

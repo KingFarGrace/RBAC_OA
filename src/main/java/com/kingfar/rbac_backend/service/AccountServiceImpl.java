@@ -8,7 +8,7 @@ import com.kingfar.rbac_backend.mapper.InfoOperateMapper;
 import com.kingfar.rbac_backend.mapper.LoginMapper;
 import com.kingfar.rbac_backend.mapper.RegisterMapper;
 import com.kingfar.rbac_backend.pojo.*;
-import com.kingfar.rbac_backend.utils.RandomCodeUtil;
+import com.kingfar.rbac_backend.utils.RandomUtil;
 import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
 import com.kingfar.rbac_backend.pojo.PersonalInfo;
 import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
@@ -178,27 +178,29 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Response register(UserRegisterForm form) {
         try {
-            String uid = RandomCodeUtil.generateRandomUID(12);
+            String uid = RandomUtil.generateRandomUID(12);
             while (registerMapper.countUserByUid(uid) != 0) {
-                uid = RandomCodeUtil.generateRandomUID(12);
+                uid = RandomUtil.generateRandomUID(12);
             }
             if (registerMapper.countUserByUsername(form.getUsername()) != 0) {
                 return new RegisterResp(3, String
-                        .format("username has been occupied(%s), please change it.", form.getUsername()));
+                        .format("username has been occupied(%s), please change it.", form.getUsername()), "");
             }
-            registerMapper
-                    .setNewUserInfo(
-                            uid,
-                            form.getUsername(),
-                            form.getPassword(),
-                            form.getRealname(),
-                            new Date(System.currentTimeMillis())
-                    );
+            if (registerMapper.setNewUserInfo(
+                    uid,
+                    form.getUsername(),
+                    form.getPassword(),
+                    form.getRealname(),
+                    new Date(System.currentTimeMillis())
+            )){
+                return new RegisterResp(0, "success", uid);
+            } else {
+                return new RegisterResp(6, "register failed by unknown reason, please try again.", "");
+            }
         } catch (DuplicateKeyException duplicateKeyException) {
             System.out.println(duplicateKeyException.getMessage());
-            return new RegisterResp(4, "server error, please try later.");
+            return new RegisterResp(4, "server error, please try later.", "");
         }
-        return new RegisterResp(0, "success");
     }
 
     @Override
@@ -253,21 +255,22 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Response updateAccountInfo(AccountInfoOptForm form) {
         try {
-            if (UPDATE_COLUMN_USERNAME.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_USERNAME);
-                return updateUsername(form.getUid(), form.getNewAccountInfo());
-            } else if (UPDATE_COLUMN_PASSWORD.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_PASSWORD);
-                return updatePassword(form.getUid(), form.getNewAccountInfo());
-            } else if (UPDATE_COLUMN_TELENUM.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_TELENUM);
-                return updateTelenum(form.getUid(), form.getNewAccountInfo());
-            } else if (UPDATE_COLUMN_EMAIL.equals(form.getWhichToUpdate())) {
-                System.out.println("update:" + UPDATE_COLUMN_EMAIL);
-                return updateEmail(form.getUid(), form.getNewAccountInfo());
-            } else {
-                return new InfoOptResp(2, String
-                        .format("reject by server:　unauthorized update request(%s)", form.getWhichToUpdate()));
+            switch (form.getWhichToUpdate()) {
+                case UPDATE_COLUMN_USERNAME:
+                    System.out.println("update:" + UPDATE_COLUMN_USERNAME);
+                    return updateUsername(form.getUid(), form.getNewAccountInfo());
+                case UPDATE_COLUMN_PASSWORD:
+                    System.out.println("update:" + UPDATE_COLUMN_PASSWORD);
+                    return updatePassword(form.getUid(), form.getNewAccountInfo());
+                case UPDATE_COLUMN_TELENUM:
+                    System.out.println("update:" + UPDATE_COLUMN_TELENUM);
+                    return updateTelenum(form.getUid(), form.getNewAccountInfo());
+                case UPDATE_COLUMN_EMAIL:
+                    System.out.println("update:" + UPDATE_COLUMN_EMAIL);
+                    return updateEmail(form.getUid(), form.getNewAccountInfo());
+                default:
+                    return new InfoOptResp(2, String
+                            .format("reject by server:　unauthorized update request(%s)", form.getWhichToUpdate()));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
