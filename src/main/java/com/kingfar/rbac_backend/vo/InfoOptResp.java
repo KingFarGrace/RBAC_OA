@@ -1,4 +1,4 @@
-package com.kingfar.rbac_backend.dto;
+package com.kingfar.rbac_backend.vo;
 
 /**
  * @author ZKH

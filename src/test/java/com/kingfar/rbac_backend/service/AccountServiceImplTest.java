@@ -1,12 +1,9 @@
 package com.kingfar.rbac_backend.service;
 
-import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
-import com.kingfar.rbac_backend.vo.UserRegisterForm;
+import com.kingfar.rbac_backend.dto.UserAuthenticationForm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class AccountServiceImplTest {

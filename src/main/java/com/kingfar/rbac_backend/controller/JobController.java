@@ -1,9 +1,9 @@
 package com.kingfar.rbac_backend.controller;
 
-import com.kingfar.rbac_backend.dto.Response;
+import com.kingfar.rbac_backend.vo.Response;
 import com.kingfar.rbac_backend.service.JobArrangementService;
-import com.kingfar.rbac_backend.vo.JobInfoOptForm;
-import com.kingfar.rbac_backend.vo.UserJobInfoOptForm;
+import com.kingfar.rbac_backend.dto.JobInfoOptForm;
+import com.kingfar.rbac_backend.dto.UserJobInfoOptForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

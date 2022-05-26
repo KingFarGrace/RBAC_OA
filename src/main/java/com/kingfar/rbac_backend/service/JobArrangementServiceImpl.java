@@ -1,15 +1,15 @@
 package com.kingfar.rbac_backend.service;
 
-import com.kingfar.rbac_backend.dto.DepartOptResp;
-import com.kingfar.rbac_backend.dto.GroupOptResp;
-import com.kingfar.rbac_backend.dto.Response;
-import com.kingfar.rbac_backend.dto.RoleOptResp;
+import com.kingfar.rbac_backend.vo.DepartOptResp;
+import com.kingfar.rbac_backend.vo.GroupOptResp;
+import com.kingfar.rbac_backend.vo.Response;
+import com.kingfar.rbac_backend.vo.RoleOptResp;
 import com.kingfar.rbac_backend.mapper.JobArrangementMapper;
 import com.kingfar.rbac_backend.mapper.LoginMapper;
 import com.kingfar.rbac_backend.pojo.*;
 import com.kingfar.rbac_backend.utils.RandomUtil;
-import com.kingfar.rbac_backend.vo.JobInfoOptForm;
-import com.kingfar.rbac_backend.vo.UserJobInfoOptForm;
+import com.kingfar.rbac_backend.dto.JobInfoOptForm;
+import com.kingfar.rbac_backend.dto.UserJobInfoOptForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -273,7 +273,7 @@ public class JobArrangementServiceImpl implements JobArrangementService {
             } else {
                 return new GroupOptResp(
                         6,
-                        "failed to set user in group by unknown reason, please try again.",
+                        "failed vo set user in group by unknown reason, please try again.",
                         null
                 );
             }
@@ -317,7 +317,7 @@ public class JobArrangementServiceImpl implements JobArrangementService {
             } else {
                 return new DepartOptResp(
                         6,
-                        "failed to set user in department by unknown reason, please try again.",
+                        "failed vo set user in department by unknown reason, please try again.",
                         null
                 );
             }
@@ -358,7 +358,7 @@ public class JobArrangementServiceImpl implements JobArrangementService {
             } else {
                 return new RoleOptResp(
                         6,
-                        "failed to set user in department by unknown reason, please try again."
+                        "failed vo set user in department by unknown reason, please try again."
                 );
             }
         } catch (Exception e) {

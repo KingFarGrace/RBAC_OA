@@ -79,7 +79,7 @@ public interface JobArrangementMapper {
      * establish new group(need for permission)
      * @param groupName name of group
      * @param groupCode code of group
-     * @return success to set a new group or not
+     * @return success vo set a new group or not
      */
     boolean setNewGroup(@Param("gname") String groupName, @Param("gcode") String groupCode);
 
@@ -87,7 +87,7 @@ public interface JobArrangementMapper {
      * establish new department(need for permission)
      * @param departName name of department
      * @param departCode code of department
-     * @return success to set a new department or not
+     * @return success vo set a new department or not
      */
     boolean setNewDepartment(@Param("dname") String departName, @Param("dcode") String departCode);
 
@@ -95,7 +95,7 @@ public interface JobArrangementMapper {
      * establish new role/job(need for permission)
      * @param roleName name of role
      * @param roleCode code of role
-     * @return success to set a new role or not
+     * @return success vo set a new role or not
      */
     boolean setNewRole(@Param("rname") String roleName, @Param("rcode") String roleCode);
 

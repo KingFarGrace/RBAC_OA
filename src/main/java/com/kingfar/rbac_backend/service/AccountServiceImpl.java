@@ -1,18 +1,18 @@
 package com.kingfar.rbac_backend.service;
 
-import com.kingfar.rbac_backend.dto.InfoOptResp;
-import com.kingfar.rbac_backend.dto.RegisterResp;
-import com.kingfar.rbac_backend.dto.Response;
-import com.kingfar.rbac_backend.dto.UserInfoResp;
+import com.kingfar.rbac_backend.vo.InfoOptResp;
+import com.kingfar.rbac_backend.vo.RegisterResp;
+import com.kingfar.rbac_backend.vo.Response;
+import com.kingfar.rbac_backend.vo.UserInfoResp;
 import com.kingfar.rbac_backend.mapper.InfoOperateMapper;
 import com.kingfar.rbac_backend.mapper.LoginMapper;
 import com.kingfar.rbac_backend.mapper.RegisterMapper;
 import com.kingfar.rbac_backend.pojo.*;
 import com.kingfar.rbac_backend.utils.RandomUtil;
-import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
+import com.kingfar.rbac_backend.dto.AccountInfoOptForm;
 import com.kingfar.rbac_backend.pojo.PersonalInfo;
-import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
-import com.kingfar.rbac_backend.vo.UserRegisterForm;
+import com.kingfar.rbac_backend.dto.UserAuthenticationForm;
+import com.kingfar.rbac_backend.dto.UserRegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -210,9 +210,9 @@ public class AccountServiceImpl implements AccountService {
                     .format("username(%s) has been used, please change.", newUsername));
         }
         if (infoOperateMapper.updateUsername(uid, newUsername)) {
-            return new InfoOptResp(0, "success to update username");
+            return new InfoOptResp(0, "success vo update username");
         } else {
-            return new InfoOptResp(1, "failed to update user info(no such user)");
+            return new InfoOptResp(1, "failed vo update user info(no such user)");
         }
     }
 
@@ -220,9 +220,9 @@ public class AccountServiceImpl implements AccountService {
     public Response updatePassword(String uid, String newPassword) {
         // TODO decrypt and encrypt
         if (infoOperateMapper.updatePassword(uid, newPassword)) {
-            return new InfoOptResp(0, "success to update Password");
+            return new InfoOptResp(0, "success vo update Password");
         } else {
-            return new InfoOptResp(1, "failed to update user info(no such user)");
+            return new InfoOptResp(1, "failed vo update user info(no such user)");
         }
     }
 
@@ -233,9 +233,9 @@ public class AccountServiceImpl implements AccountService {
                     .format("telephone number(%s) has been used, please change.", newTelenum));
         }
         if (infoOperateMapper.updateTelenum(uid, newTelenum)) {
-            return new InfoOptResp(0, "success to update telephone number");
+            return new InfoOptResp(0, "success vo update telephone number");
         } else {
-            return new InfoOptResp(1, "failed to update user info(no such user)");
+            return new InfoOptResp(1, "failed vo update user info(no such user)");
         }
     }
 
@@ -246,9 +246,9 @@ public class AccountServiceImpl implements AccountService {
                     .format("email address(%s) has been used, please change.", newEmail));
         }
         if (infoOperateMapper.updateEmail(uid, newEmail)) {
-            return new InfoOptResp(0, "success to update email address");
+            return new InfoOptResp(0, "success vo update email address");
         } else {
-            return new InfoOptResp(1, "failed to update user info(no such user)");
+            return new InfoOptResp(1, "failed vo update user info(no such user)");
         }
     }
 

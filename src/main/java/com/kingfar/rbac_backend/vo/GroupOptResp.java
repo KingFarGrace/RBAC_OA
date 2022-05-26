@@ -1,7 +1,6 @@
-package com.kingfar.rbac_backend.dto;
+package com.kingfar.rbac_backend.vo;
 
 import com.kingfar.rbac_backend.pojo.GroupDetailInfo;
-import com.kingfar.rbac_backend.pojo.GroupInfo;
 import lombok.Getter;
 
 /**

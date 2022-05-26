@@ -1,12 +1,12 @@
 package com.kingfar.rbac_backend.service;
 
-import com.kingfar.rbac_backend.dto.Response;
-import com.kingfar.rbac_backend.dto.UserInfoResp;
+import com.kingfar.rbac_backend.vo.Response;
+import com.kingfar.rbac_backend.vo.UserInfoResp;
 import com.kingfar.rbac_backend.pojo.UserBasicInfo;
-import com.kingfar.rbac_backend.vo.AccountInfoOptForm;
+import com.kingfar.rbac_backend.dto.AccountInfoOptForm;
 import com.kingfar.rbac_backend.pojo.PersonalInfo;
-import com.kingfar.rbac_backend.vo.UserAuthenticationForm;
-import com.kingfar.rbac_backend.vo.UserRegisterForm;
+import com.kingfar.rbac_backend.dto.UserAuthenticationForm;
+import com.kingfar.rbac_backend.dto.UserRegisterForm;
 
 import java.util.List;
 
@@ -36,21 +36,21 @@ public interface AccountService {
     /**
      * query all information, extended by basicInfo
      * @param basicInfo parameter come from method queryBasicInfo
-     * @return see details in {@link com.kingfar.rbac_backend.dto.UserInfoResp}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.UserInfoResp}
      */
     UserInfoResp queryFullInfo(UserBasicInfo basicInfo);
 
     /**
      * main method which will be called by login controller
-     * @param form {@link com.kingfar.rbac_backend.vo.UserAuthenticationForm}
-     * @return see details in {@link com.kingfar.rbac_backend.dto.UserInfoResp}
+     * @param form {@link com.kingfar.rbac_backend.dto.UserAuthenticationForm}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.UserInfoResp}
      */
     Response login(UserAuthenticationForm form);
 
     /**
      * main method which will be called by register controller
-     * @param form {@link com.kingfar.rbac_backend.vo.UserRegisterForm}
-     * @return see details in {@link com.kingfar.rbac_backend.dto.RegisterResp}
+     * @param form {@link com.kingfar.rbac_backend.dto.UserRegisterForm}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.RegisterResp}
      */
     Response register(UserRegisterForm form);
 
@@ -58,7 +58,7 @@ public interface AccountService {
      * update user account ID: username
      * @param uid
      * @param newUsername
-     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.InfoOptResp}
      */
     Response updateUsername(String uid, String newUsername);
 
@@ -66,7 +66,7 @@ public interface AccountService {
      * update password
      * @param uid
      * @param newPassword
-     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.InfoOptResp}
      */
     Response updatePassword(String uid, String newPassword);
 
@@ -74,7 +74,7 @@ public interface AccountService {
      * update user account ID: telenum
      * @param uid
      * @param newTelenum
-     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.InfoOptResp}
      */
     Response updateTelenum(String uid, String newTelenum);
 
@@ -82,22 +82,22 @@ public interface AccountService {
      * update user account ID: email
      * @param uid
      * @param newEmail
-     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.InfoOptResp}
      */
     Response updateEmail(String uid, String newEmail);
 
     /**
-     * main method to update user account ID(include username, telephone number, email address)
-     * @param form {@link com.kingfar.rbac_backend.vo.AccountInfoOptForm}
-     * @return see details in {@link com.kingfar.rbac_backend.dto.UserInfoResp}
+     * main method vo update user account ID(include username, telephone number, email address)
+     * @param form {@link com.kingfar.rbac_backend.dto.AccountInfoOptForm}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.UserInfoResp}
      */
     Response updateAccountInfo(AccountInfoOptForm form);
 
     /**
-     * update method to batch entry user personal information (include realname, age, gender)
+     * update method vo batch entry user personal information (include realname, age, gender)
      * these information can be read by everyone, but only be updated by administer
      * @param infos {@link com.kingfar.rbac_backend.pojo.PersonalInfo}
-     * @return see details in {@link com.kingfar.rbac_backend.dto.InfoOptResp}
+     * @return see details in {@link com.kingfar.rbac_backend.vo.InfoOptResp}
      * return success message when all queries (data in form) has been done successfully
      * otherwise return failed message, but those queries which are successfully done will be kept
      */
