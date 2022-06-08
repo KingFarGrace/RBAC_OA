@@ -44,7 +44,7 @@ class AccountServiceImplTest {
 
     @Test
     void testLogin() {
-        System.out.println(accountService.login(new UserAuthenticationForm("120181080602", "132546")));
+//        System.out.println(accountService.login(new UserAuthenticationForm("120181080602", "132546")));
     }
 
     @Test
