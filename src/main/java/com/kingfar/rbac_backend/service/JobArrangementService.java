@@ -33,6 +33,7 @@ public interface JobArrangementService {
      */
     Response queryJobInfo(JobInfoOptForm form);
 
+
     /**
      * set a new group with random 8-bit code
      * @param groupName name of group

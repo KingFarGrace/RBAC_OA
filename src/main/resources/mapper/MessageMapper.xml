@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--suppress ALL -->
+<mapper namespace="com.kingfar.rbac_backend.mapper.MessageMapper">
+
+    <insert id="setGroupMessage">
+        INSERT INTO groupMessage(gid, content, uid, is_from_user)
+        VALUE ((SELECT gid FROM groupp WHERE #{gname}=gname), #{content}, #{uid}, #{is_from_user})
+    </insert>
+    <insert id="setDepartMessage">
+        INSERT INTO departMessage(did, content, uid, is_from_user)
+        VALUE ((SELECT did FROM department WHERE #{dname}=dname), #{content}, #{uid}, #{is_from_user})
+    </insert>
+    <select id="queryDepartAnnouncement" resultType="com.kingfar.rbac_backend.pojo.DepartMessage">
+        SELECT mid, departMessage.did did, uid, content, is_from_user
+        FROM departMessage, department
+        WHERE departMessage.did=department.did AND department.dname=#{dname} AND uid='000000000000'
+    </select>
+    <select id="queryDepartMessage" resultType="com.kingfar.rbac_backend.pojo.DepartMessage">
+        SELECT mid, departMessage.did did, uid, content, is_from_user
+        FROM departMessage, department
+        WHERE departMessage.did=department.did AND department.dname=#{dname} AND uid=#{uid}
+    </select>
+    <select id="queryGroupAnnouncement" resultType="com.kingfar.rbac_backend.pojo.GroupMessage">
+        SELECT mid, groupMessage.gid gid, uid, content, is_from_user
+        FROM groupMessage, groupp
+        WHERE groupMessage.gid=groupp.gid AND groupp.gname=#{gname} AND uid='000000000000'
+    </select>
+    <select id="queryGroupMessage" resultType="com.kingfar.rbac_backend.pojo.GroupMessage">
+        SELECT mid, groupMessage.gid gid, uid, content, is_from_user
+        FROM groupMessage, groupp
+        WHERE groupMessage.gid=groupp.gid AND groupp.gname=#{gname} AND uid=#{uid}
+    </select>
+    <select id="querySystemAnnouncement" resultType="com.kingfar.rbac_backend.pojo.DepartMessage">
+        SELECT mid, content FROM departMessage WHERE did=10000 AND uid='000000000000'
+    </select>
+
+</mapper>

@@ -27,7 +27,7 @@ public class AccountController {
         return accountService.register(form);
     }
 
-    @PostMapping("/update/username")
+    @PostMapping("/update/account")
     Response updateUsername(@RequestBody AccountInfoOptForm form) {
         return accountService.updateAccountInfo(form);
     }
